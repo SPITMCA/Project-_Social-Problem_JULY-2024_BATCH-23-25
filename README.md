@@ -20,7 +20,7 @@
  
  1. pip install virtualenv
  2. python -m venv ve
- 3. pip install django pillow joblib sklearn
+ 3. pip install django pillow joblib scikit-learn
  4. python manage.py runserver
 
 ## Happy to receive comments
