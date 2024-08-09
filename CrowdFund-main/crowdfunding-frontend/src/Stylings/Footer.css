@@ -1,0 +1,16 @@
+.custom-footer {
+    background-color: #463f3a;
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+    font-size: medium;
+}
+
+.custom-footer a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.custom-footer a:hover {
+    color: #d3d3d3;
+}
