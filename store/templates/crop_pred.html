@@ -4,7 +4,7 @@
 <br><br>
 
 <div class="text-center">
-    <button class="geeks btn btn-primary" onclick="getlocation()">Click</button>
+    <button class="geeks btn btn-primary" onclick="getlocation()">Get Location</button>
     <p id="demo1"></p>
 </div>
 
@@ -172,5 +172,14 @@ if (predictedCrops.length === 0) {
         document.getElementById('predictionContainer').style.display = 'block';
     });
 </script>
+
+<style>
+  body {
+      background-image: url('https://counties.agrilife.org/williamson/files/2020/03/soil-temp-scaled.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  }
+</style>
 
 {% endblock %}
