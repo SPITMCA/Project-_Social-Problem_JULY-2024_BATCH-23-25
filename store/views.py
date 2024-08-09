@@ -25,30 +25,40 @@ def crop_pred(request):
     return render(request,'crop_pred.html')
 
 def predict(request):
-    data = []
-    data.append(request.POST.get('tempVal'))
-    data.append(request.POST.get('humidityVal'))
-    data.append(request.POST.get('phVal'))
-    data.append(request.POST.get('rainfallVal'))
+    # Retrieve the input values from the POST request
+    temperature = float(request.POST.get('tempVal'))
+    humidity = float(request.POST.get('humidityVal'))
+    ph_value = float(request.POST.get('phVal'))
+    rainfall = float(request.POST.get('rainfallVal'))
 
+    # Combine the input values into a single list
+    data = [temperature, humidity, ph_value, rainfall]
+
+    # Load the trained model
     md = joblib.load('final_model.sav')
-    predictcrop=[data]
-    # Putting the names of crop in a single list
-    crops=['wheat','mungbean','Tea','millet','maize','lentil','jute','cofee','cotton','ground nut','peas','rubber','sugarcane','tobacco','kidney beans','moth beans','coconut','blackgram','adzuki beans','pigeon peas','chick peas','banana','grapes','apple','mango','muskmelon','orange','papaya','watermelon','pomegranate']
-    cr='rice'
-    predictions = md.predict(predictcrop)
-    count=0
-    for i in range(0,30):
-        if(predictions[0][i]==1):
-            c=crops[i]
-            count=count+1
+
+    # Predict the crop based on the input data
+    predictions = md.predict([data])
+
+    # List of crops corresponding to the model's output
+    crops = ['wheat', 'mungbean', 'tea', 'millet', 'maize', 'lentil', 'jute', 'coffee', 'cotton', 'groundnut',
+             'peas', 'rubber', 'sugarcane', 'tobacco', 'kidney beans', 'moth beans', 'coconut', 'blackgram',
+             'adzuki beans', 'pigeon peas', 'chick peas', 'banana', 'grapes', 'apple', 'mango', 'muskmelon',
+             'orange', 'papaya', 'watermelon', 'pomegranate']
+
+    # Default crop suggestion if no match is found
+    default_crop = 'rice'
+
+    # Determine the appropriate crop suggestion
+    suggested_crop = default_crop
+    for i in range(len(crops)):
+        if predictions[0][i] == 1:
+            suggested_crop = crops[i]
             break
-        i=i+1
-    if(count==0):
-        context = {'ans': cr}
-    else:
-        context = {'ans': c}
-    return render(request,'crop_pred.html',context)
+
+    # Pass the suggested crop to the template
+    context = {'ans': suggested_crop}
+    return render(request, 'crop_pred.html', context)
 
 
 

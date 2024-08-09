@@ -1,51 +1,176 @@
 {% extends 'base.html' %}
 
 {% block content %}
- <br><br>
+<br><br>
 
-<!--
-  <button class = "geeks" style="margin-left:150px;" onclick="getlocation()">Click</button>
-  <p id="demo1"></p>
-  -->
+<div class="text-center">
+    <button class="geeks btn btn-primary" onclick="getlocation()">Click</button>
+    <p id="demo1"></p>
+</div>
 
+<div class="d-flex justify-content-center">
+    <form id="cropForm" style="width:40%; text-align:center;" class="mx-auto">
 
-<form method="post" enctype="multipart/form-data" action="predict" style="width:40%;" class="mx-auto">
+        <div class="mb-3">
+            <label class="form-label">Temperature</label>
+            <input type="text" class="form-control" id="tempVal" placeholder="Enter temperature" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Humidity</label>
+            <input type="text" class="form-control" id="humidityVal" placeholder="Enter humidity" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">pH value</label>
+            <input type="text" class="form-control" id="phVal" placeholder="Enter pH" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Rainfall</label>
+            <input type="text" class="form-control" id="rainfallVal" placeholder="Enter rainfall value" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+</div>
 
-  {% csrf_token %}
-
-  <div class="mb-3">
-    <label class="form-label">Temperature</label>
-    <input type="text" class="form-control" name="tempVal" placeholder="Enter temperature" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Humidity</label>
-    <input type="text" class="form-control" name='humidityVal' placeholder="Enter humidity" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">pH value</label>
-    <input type="text" class="form-control" name='phVal' placeholder="Enter pH" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Rainfall</label>
-    <input type="text" class="form-control" name='rainfallVal' placeholder="Enter rainfall value" required>
-  </div>
-  <button type="submit" value="submit" class="btn btn-primary">Predict</button>
-</form>
 <br/><br/><br/>
-{% if ans %}
-<h2><pre><mark>The Predicted Crop is {{ans}}</mark></pre></h2>
-{% endif %}
 
-<!--
-   <script>
-        var variable1 = document.getElementById("demo1");
-        function getlocation(){
-                navigator.geolocation.getCurrentPosition(showLoc);
-        }
-        function showLoc(pos){
-                variable1.innerHTML = "Latitude: " + pos.coords.latitude + 
-                "<br>Longitude: " + pos.coords.longitude; 
-            }
-   </script>
--->
+<div id="predictionContainer" style="display: none; text-align: center; padding: 20px; margin-top: 20px; border: 2px solid #007bff; border-radius: 10px; background-color: #f8f9fa;">
+  <h2 style="font-family: 'Arial', sans-serif; font-size: 24px; color: #007bff; margin-bottom: 20px; line-height: 1.5;">
+      <mark id="predictionResult" style="background-color: #e9ecef; padding: 10px; border-radius: 5px; display: inline-block; line-height: 1.5;">
+          The Predicted Crops are
+      </mark>
+  </h2>
+</div>
+
+
+
+<script>
+    // Function to get location
+    var variable1 = document.getElementById("demo1");
+    function getlocation(){
+        navigator.geolocation.getCurrentPosition(showLoc);
+    }
+    function showLoc(pos){
+        variable1.innerHTML = "Latitude: " + pos.coords.latitude + 
+        "<br>Longitude: " + pos.coords.longitude; 
+    }
+
+    // Prediction Logic in JavaScript for Multiple Crops
+    document.getElementById('cropForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get input values
+        var temp = parseFloat(document.getElementById('tempVal').value);
+        var humidity = parseFloat(document.getElementById('humidityVal').value);
+        var ph = parseFloat(document.getElementById('phVal').value);
+        var rainfall = parseFloat(document.getElementById('rainfallVal').value);
+
+        // Example logic for multiple crop predictions (replace with real logic as needed)
+        var predictedCrops = [];
+
+if (temp > 25 && humidity > 70 && rainfall > 1500 && ph >= 5.5 && ph <= 6.5) {
+    predictedCrops.push("Rice");
+}
+if (temp > 12 && temp < 25 && ph >= 6.0 && ph <= 7.5 && rainfall >= 500 && rainfall <= 1000) {
+    predictedCrops.push("Wheat");
+}
+if (temp > 20 && rainfall > 1500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Sugarcane");
+}
+if (temp > 18 && temp < 30 && rainfall >= 500 && rainfall <= 800 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Maize");
+}
+if (temp > 18 && temp < 30 && rainfall >= 1000 && humidity > 60 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Mungbean");
+}
+if (temp > 15 && temp < 25 && humidity > 60 && rainfall >= 1500 && ph >= 4.5 && ph <= 5.5) {
+    predictedCrops.push("Tea");
+}
+if (temp > 20 && temp < 30 && rainfall >= 500 && humidity > 50 && ph >= 5.0 && ph <= 6.0) {
+    predictedCrops.push("Millet");
+}
+if (temp > 20 && temp < 30 && rainfall >= 500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Lentil");
+}
+if (temp > 25 && rainfall >= 1500 && ph >= 4.5 && ph <= 6.0) {
+    predictedCrops.push("Jute");
+}
+if (temp > 15 && temp < 25 && humidity > 60 && rainfall >= 2000 && ph >= 5.0 && ph <= 6.0) {
+    predictedCrops.push("Coffee");
+}
+if (temp > 25 && rainfall > 500 && ph >= 5.0 && ph <= 6.5) {
+    predictedCrops.push("Cotton");
+}
+if (temp > 20 && rainfall >= 500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Groundnut");
+}
+if (temp > 15 && temp < 25 && rainfall >= 800 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Peas");
+}
+if (temp > 25 && humidity > 75 && rainfall >= 1500 && ph >= 4.5 && ph <= 6.0) {
+    predictedCrops.push("Rubber");
+}
+if (temp > 20 && rainfall >= 1000 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Tobacco");
+}
+if (temp > 15 && rainfall >= 800 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Kidney Beans");
+}
+if (temp > 25 && rainfall >= 500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Moth Beans");
+}
+if (temp > 20 && temp < 30 && humidity > 60 && rainfall >= 1000 && ph >= 5.0 && ph <= 7.0) {
+    predictedCrops.push("Coconut");
+}
+if (temp > 20 && rainfall >= 800 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Blackgram");
+}
+if (temp > 20 && rainfall >= 500 && ph >= 5.0 && ph <= 7.0) {
+    predictedCrops.push("Adzuki Beans");
+}
+if (temp > 20 && temp < 30 && rainfall >= 500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Pigeon Peas");
+}
+if (temp > 20 && temp < 30 && rainfall >= 500 && ph >= 6.0 && ph <= 7.5) {
+    predictedCrops.push("Chick Peas");
+}
+if (temp > 25 && humidity > 70 && rainfall >= 1500 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Banana");
+}
+if (temp > 15 && temp < 25 && humidity > 60 && rainfall >= 800 && ph >= 5.0 && ph <= 7.0) {
+    predictedCrops.push("Grapes");
+}
+if (temp > 15 && temp < 25 && humidity > 60 && rainfall >= 1000 && ph >= 5.5 && ph <= 6.5) {
+    predictedCrops.push("Apple");
+}
+if (temp > 25 && humidity > 60 && rainfall >= 1000 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Mango");
+}
+if (temp > 25 && rainfall >= 1000 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Muskmelon");
+}
+if (temp > 20 && rainfall >= 800 && ph >= 5.0 && ph <= 7.0) {
+    predictedCrops.push("Orange");
+}
+if (temp > 25 && humidity > 60 && rainfall >= 1000 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Papaya");
+}
+if (temp > 25 && humidity > 60 && rainfall >= 1000 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Watermelon");
+}
+if (temp > 20 && rainfall >= 800 && ph >= 5.5 && ph <= 7.0) {
+    predictedCrops.push("Pomegranate");
+}
+
+if (predictedCrops.length === 0) {
+    predictedCrops.push("Need more rain");
+}
+
+
+
+        // Display the prediction result && make it visible
+        document.getElementById('predictionResult').textContent = "The Predicted Crops are: " + predictedCrops.join(", ");
+        document.getElementById('predictionContainer').style.display = 'block';
+    });
+</script>
+
 {% endblock %}
