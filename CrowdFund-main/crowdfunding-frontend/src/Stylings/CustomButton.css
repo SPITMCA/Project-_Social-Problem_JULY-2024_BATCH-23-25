@@ -1,0 +1,25 @@
+/* CustomButton.css */
+.custom-button.custom-button-small {
+    background-color: #463f3a !important; /* Default background color */
+    color: #FFFFFF !important; /* Text color */
+    border: none !important; /* Remove border */
+    transition: background-color 0.3s ease;
+    box-shadow: none !important; /* Remove default shadow */
+}
+
+.custom-button.custom-button-small:hover {
+    background-color: #3e3734 !important; /* Darker background on hover */
+    color: #FFFFFF !important; /* Text color on hover */
+}
+
+.custom-button.custom-button-small:active {
+    background-color: #3e3734 !important; /* Darker shade for active state */
+    color: #FFFFFF !important; /* Text color on active state */
+}
+
+.custom-button.custom-button-small:focus {
+    background-color: #463f3a !important; /* Ensure focus state has the same background color */
+    color: #FFFFFF !important; /* Text color on focus */
+    box-shadow: none !important; /* Removes default Bootstrap focus shadow */
+    outline: none !important; /* Removes default focus outline */
+}
