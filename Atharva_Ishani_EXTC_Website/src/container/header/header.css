@@ -1,0 +1,108 @@
+.bigHeader {
+  font-size: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+  color: black;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0);
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  padding: 0 1rem !important;
+  text-decoration: none !important;
+}
+
+.nav-link a {
+  text-decoration: none !important;
+}
+
+.nav-item {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.nav {
+  border: 5px solid black;
+}
+
+.navbar-nav > a {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.header-styles {
+  height: 100vh;
+}
+
+@media (max-width: 575px) {
+  .enroll-btn {
+    margin-top: 1rem;
+  }
+}
+
+.div-col {
+  width: 100%;
+  flex: 1 !important;
+  padding: 0;
+  max-width: 100% !important;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto; /* Ensure images maintain aspect ratio */
+}
+
+.carousel-caption {
+  right: 35%;
+  top: 35%;
+}
+
+@media (max-width: 750px) {
+  .carousel-caption {
+    top: 20%;
+  }
+
+  .bigHeader {
+    font-size: 2rem;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 550px) {
+  .carousel-caption {
+    width: 80%;
+  }
+  .carousel-caption h1 {
+    font-size: 1.7rem;
+  }
+  .bigHeader {
+    font-size: 1.2rem;
+    padding: 0px;
+    margin: 0px;
+    text-align: left;
+  }
+
+  .navbar-brand img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .carousel-item img {
+    height: 550px !important;
+    width: 100%;
+    border-radius: 1px;
+  }
+
+  .myTextPara{
+    font-size: 0.8rem;
+  }
+}

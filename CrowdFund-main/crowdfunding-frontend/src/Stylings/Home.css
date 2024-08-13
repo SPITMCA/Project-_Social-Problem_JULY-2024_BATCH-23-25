@@ -1,0 +1,39 @@
+.custom-card {
+    display: flex;
+    flex-direction: column;
+    height: 400px; /* Fixed height for all cards */
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.custom-card .card-img-top {
+    object-fit: cover; /* Ensures the image covers the entire area */
+    object-position: top; 
+    height: 400px; /* Height of the image */
+    width: 100%;   /* Ensure image covers full width */
+}
+
+.custom-card .card-body {
+    padding: 15px;
+    flex: 1;
+    overflow: hidden; /* Hide overflow text */
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-card .card-title {
+    margin-bottom: 10px; /* Add space between title and text */
+}
+
+.custom-card .card-text {
+    flex: 1;
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Number of lines to show before truncating */
+    -webkit-box-orient: vertical;
+}
+  
